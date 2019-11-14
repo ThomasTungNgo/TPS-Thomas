@@ -1,0 +1,29 @@
+﻿
+
+@{
+    ViewData["Title"] = "Create";
+    var tp = (TPS.Domain.TravelPackage)ViewBag.TravelPackage;
+    var cities = (List<TPS.Domain.City>)ViewBag.Cities;
+    var page = (int)ViewBag.PageNumber;
+}
+
+<h1>@tp.Name (Add City)</h1>
+
+@foreach (var c in cities)
+{  
+    <form asp-action="Create">
+        <div style="padding:2.5px;border:1px solid black;margin:1.5px;">
+             @c.Name (@c.Country) 
+             Days: <input type="text"name="NumberOfDays" />
+            <input type="hidden" name="TravelPackageId" value="@tp.Id" />
+            <input type="hidden" name="CityId" value="@c.Id" />
+            <input type="submit" value="Add" />
+        </div>               
+    </form>      
+        }
+@if (page > 0)
+{
+    <a asp-action="Create" asp-route-tpid="@tp.Id" asp-route-page="@(page + 1)">Previous</a>
+}
+<a asp-action="Create" asp-route-tpid="@tp.Id" asp-route-page="@(page + 1)">Next</a>
+

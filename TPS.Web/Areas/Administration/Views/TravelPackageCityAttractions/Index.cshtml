@@ -1,0 +1,32 @@
+﻿@model IEnumerable<TPS.Domain.TravelPackageCityAttraction>
+
+@{
+    ViewData["Title"] = "Index";
+    var city = (TPS.Domain.TravelPackageCity)ViewBag.City;
+}
+
+<h1>@city.TravelPackage.Name</h1>
+<h2>@city.City.Name @city.City.Country</h2>
+
+<p>
+    <a asp-action="Create" asp-route-tpcId="@city.Id">Add Attraction</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+               Attraction
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var a in Model) {
+        <tr>
+
+            <td>
+                @a.CityAttraction.Name
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

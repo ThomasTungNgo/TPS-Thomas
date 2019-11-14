@@ -1,0 +1,8 @@
+Users:
+(Employee)
+username: edward@email.com
+password: e123!@#
+
+(Customer)
+username: charlie@email.com
+password: c123!@#

@@ -1,0 +1,21 @@
+﻿@model IEnumerable<TPS.Domain.CityAttraction>
+@{
+    ViewData["Title"] = "Create";
+    var travelPackageCity = (TravelPackageCity)ViewBag.TravelPackageCity;
+}
+
+<h1>@travelPackageCity.TravelPackage.Name</h1>
+<h2>@travelPackageCity.City.Name @travelPackageCity.City.Country</h2>
+
+@foreach (var cityAttraction in Model)
+{
+    <div style="margin:2.5px;border:1px solid black;padding:2.5px">
+        <form asp-action="Create">
+            @cityAttraction.Name
+            <input type="hidden" name="TravelPackageCityId" value="@travelPackageCity.Id" />
+            <input type="hidden" name="CityAttractionId" value="@cityAttraction.Id" />
+            <input type="submit" value="Add Attraction" />
+        </form>
+    </div>
+}
+
