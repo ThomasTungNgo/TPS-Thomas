@@ -18,7 +18,8 @@ namespace TPS.Domain
         public TravelPackageStatus Status { get => (TravelPackageStatus)StatusId; } 
         //recommended retail price
         public decimal RRP { get; set; }
-
+        public int DurationDay { get; set; }
+        public int DurationNight { get; set; }
         public TravelPackageCity AddCity(City c,int days, params CityAttraction[] attractions)
         {
             var tpc = new TravelPackageCity

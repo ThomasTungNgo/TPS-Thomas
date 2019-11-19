@@ -2,28 +2,50 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using TPS.Domain;
 
-namespace TPS.Web.Api
+namespace TPS.Web.Controllers
 {
-    [Route("api/packages")]
-    [ApiController]
-    public class TravelPackagesController : ControllerBase
+    public class TravelPackagesController : Controller
     {
+        private readonly TPSDbContext _context;
 
-        public TravelPackagesController()
+        public TravelPackagesController(TPSDbContext context)
         {
-
+            _context = context;
         }
 
-        [HttpGet]
-        public List<object> Get()
+        // GET: TravelPackages
+        public async Task<IActionResult> Index()
         {
-            var result = new List<object>();
-            result.Add(new { Width = 2, Height = 4 });
-            result.Add(new { Name = "Fred", Age = 40 });
-            return result; 
+            return View(await _context.TravelPackages.ToListAsync());
+        }
+
+        // GET: TravelPackages/Details/5
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var travelPackage = await _context.TravelPackages
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (travelPackage == null)
+            {
+                return NotFound();
+            }
+
+            return View(travelPackage);
+        }
+
+
+               private bool TravelPackageExists(int id)
+        {
+            return _context.TravelPackages.Any(e => e.Id == id);
         }
     }
 }
