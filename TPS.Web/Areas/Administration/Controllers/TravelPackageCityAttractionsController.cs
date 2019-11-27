@@ -47,7 +47,6 @@ namespace TPS.Web.Areas.Administration.Controllers
             .Include(tpc => tpc.City)
             .First(tpc => tpc.Id == tpcId);
 
-
             ViewBag.TravelPackageCity = travelPackageCity;
 
             var attractions = _db.CityAttractions

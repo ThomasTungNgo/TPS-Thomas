@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TPS.Domain;
 
 namespace TPS.Domain.Migrations
 {
     [DbContext(typeof(TPSDbContext))]
-    partial class TPSDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191125133022_Add Intensity field to Travel Package")]
+    partial class AddIntensityfieldtoTravelPackage
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -185,10 +187,6 @@ namespace TPS.Domain.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Comment")
-                        .HasColumnType("nvarchar(500)")
-                        .HasMaxLength(500);
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -209,9 +207,6 @@ namespace TPS.Domain.Migrations
 
                     b.Property<decimal>("RRP")
                         .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("Rating")
-                        .HasColumnType("int");
 
                     b.Property<int>("StatusId")
                         .ValueGeneratedOnAdd()

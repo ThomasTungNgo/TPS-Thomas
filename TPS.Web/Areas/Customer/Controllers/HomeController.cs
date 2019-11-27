@@ -34,5 +34,15 @@ namespace TPS.Web.Areas.Customer.Controllers
             return View();
 
         }
+
+        public async Task<IActionResult> Pay()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> Comment(string comment)
+        {
+            return View();
+        }
     }
 }

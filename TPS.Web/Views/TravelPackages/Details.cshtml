@@ -1,5 +1,7 @@
 ﻿@model TPS.Domain.TravelPackage
 
+@using TPS.Web.Areas.Administration.Controllers;
+
 @{
     ViewData["Title"] = "Details";
     var picId = Model.Id + ".jpg";
@@ -39,35 +41,67 @@
         <div class="row">
             <div class="item clearfix rating_5">
                 <div class="item_image">
-                    <img src="~/images/Australia/@picId" alt="">
+                    <img src="~/images/Australia/@(Model.Id).jpg" alt="">
                 </div>
                 <div class="item_content">
                     <div class="item_price">
-                        From @Html.DisplayFor(model => model.RRP)
+                        From @Model.RRP.ToString("c")
                     </div>
                     <div class="item_title">
-                        @Html.DisplayFor(model => model.Name)
+                        @Model.Name
                     </div>
                     <ul>
                         <li>
-                            @Html.DisplayFor(model => model.DurationDay) days
-                        </li>
-                        <li>
-                            @Html.DisplayFor(model => model.DurationNight) nights
+                            Travel in:
+                            @foreach (var tpc in Model.Cities)
+                            {
+                                <div>
+                                    <div><strong>@tpc.City.Name (@tpc.NumberOfDays days)</strong></div>
+                                    <div>
+                                        <ul>
+                                            @foreach (var tpca in tpc.TravelPackageCityAttractions)
+                                            {
+                                                <li style="display:block">@tpca.CityAttraction.Name - @tpca.CityAttraction.Description</li>
+                                            }
+                                        </ul>
+                                    </div>
+                                </div>
+                            }
                         </li>
                     </ul>
                     <div class="item_text">
                         Description
-                        @Html.DisplayFor(model => model.Description)
-                        Destinations included:
+                        @Model.Description
                     </div>
                     <div class="item_more_link"><a href="#">Read More</a></div>
                 </div>
             </div>
 
-            <div>
-                <a href="#">Add To Basket (Pending)</a> |
-                <a asp-action="Index">Back to List</a>
+            <div class="buttons_container">
+                @if (User.IsInRole("Administrator"))
+                {
+                    <div class="button button_1 elements_button">
+                        <a asp-area="Administration"
+                           asp-controller="TravelPackages"
+                           asp-action="Edit"
+                           asp-route-id="@Model.Id">
+                            Edit
+                        </a> 
+                    </div>
+                }
+                @if (User.IsInRole("Customer"))
+                {
+                    <div class="button button_1 elements_button">
+                        <a asp-area="Customer"
+                           asp-controller="Home"
+                           asp-action="Index">
+                            Pay Now
+                        </a>
+                    </div>
+                }
+                <div class="button button_1 elements_button">
+                    <a asp-action="Index">Back to List</a>
+                </div>
             </div>
         </div>
     </div>

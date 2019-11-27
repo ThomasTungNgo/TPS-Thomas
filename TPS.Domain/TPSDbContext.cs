@@ -9,7 +9,6 @@ namespace TPS.Domain
     {
         protected override void OnConfiguring(DbContextOptionsBuilder o)
         {
-
             o.UseSqlServer(
                 "Data Source=localhost;Initial Catalog=TPSDb;Integrated Security=true;",
                 x => x.MigrationsAssembly("TPS.Domain")
@@ -110,7 +109,7 @@ namespace TPS.Domain
         public DbSet<City> Cities { get; set; }
         public DbSet<CityAttraction> CityAttractions { get; set; }
         public DbSet<CustomerTravelPackage> CustomerTravelPackages { get; set; }
-        public DbSet<Payment>  Payments { get; set; }
+        public DbSet<Payment> Payments { get; set; }
         public DbSet<Person> People { get; set; }
         public DbSet<TravelPackage> TravelPackages { get; set; }
         public DbSet<TravelPackageCity> TravelPackageCities { get; set; }

@@ -19,9 +19,9 @@ namespace TPS.Web.Areas.Administration.Controllers
         protected readonly UserManager<IdentityUser> _userManager;
         protected async Task<IdentityUser> getUser() => await _userManager.GetUserAsync(User);
          
-        public AdministrationController(TPSDbContext db, UserManager<IdentityUser> userManager)
+        public AdministrationController(TPSDbContext context, UserManager<IdentityUser> userManager)
         {
-            _db = db;
+            _db = context;
             _userManager = userManager;
         }
     }

@@ -7,7 +7,7 @@
 <!-- Home -->
 
 <div class="home">
-    <div class="home_background parallax-window" data-parallax="scroll" data-image-src="images/offers.jpg" data-speed="0.8"></div>
+    <div class="home_background parallax-window" data-parallax="scroll" data-image-src="/images/offers.jpg" data-speed="0.8"></div>
     <div class="container">
         <div class="row">
             <div class="col">
@@ -132,8 +132,12 @@
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
                                 </div>
-                                <div class="item_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce fringilla lectus nec diam auctor, ut fringilla diam sagittis. Quisque vel est id justo faucibus dapibus id a nibh. Aenean suscipit consequat lacus, sit amet mollis nulla. Morbi sagittis orci id lacus convallis tempus eget sit amet metus.</div>
-                                <div class="item_more_link"><a href="#">Read More</a></div>
+                                <div class="item_text">
+                                    Description:
+                                    @Html.DisplayFor(modelItem => item.Description)
+                                    </div>
+                                    
+                                    <div class="item_more_link"><a href="#">Read More</a></div>
                             </div>
                         </div>
                     }

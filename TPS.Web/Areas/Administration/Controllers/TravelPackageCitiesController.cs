@@ -61,7 +61,5 @@ namespace TPS.Web.Areas.Administration.Controllers
             ViewData["TravelPackageId"] = new SelectList(_db.TravelPackages, "Id", "Description", travelPackageCity.TravelPackageId);
             return View(travelPackageCity);
         }
-
-
     }
 }

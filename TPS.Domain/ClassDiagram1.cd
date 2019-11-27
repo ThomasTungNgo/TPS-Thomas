@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="TPS.Domain.TravelPackage">
+    <Position X="6.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAACAAAMAAAgIAAAAAAAAAQASAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>TravelPackage.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Cities" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="TPS.Domain.TravelPackageCity">
+    <Position X="10.75" Y="1.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAACAAABAAAEAAAIAAAAAABAAAAAAAgAAQAAAAAAAAI=</HashCode>
+      <FileName>TravelPackageCity.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="TravelPackageCityAttractions" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="TPS.Domain.TravelPackageCityAttraction">
+    <Position X="11" Y="6.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAgAAAAAAAAAAAAAAABABAAAAAAgAAAAAAAA=</HashCode>
+      <FileName>TravelPackageCityAttraction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TPS.Domain.City">
+    <Position X="3.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAEEAAABAAAAoAAQAAAIAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>City.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Attractions" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="TPS.Domain.CityAttraction">
+    <Position X="7" Y="5.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAACAAABAAAgAAAIAAAAAARAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CityAttraction.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="TravelPackageCityAttractions" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Enum Name="TPS.Domain.TravelPackageStatus" Collapsed="true">
+    <Position X="13.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAEAAAAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>TravelPackage.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

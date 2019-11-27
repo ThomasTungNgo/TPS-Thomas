@@ -1,13 +1,11 @@
-﻿
-
-@{
+﻿@{
     ViewData["Title"] = "Create";
     var tp = (TPS.Domain.TravelPackage)ViewBag.TravelPackage;
     var cities = (List<TPS.Domain.City>)ViewBag.Cities;
     var page = (int)ViewBag.PageNumber;
 }
 
-<h1>@tp.Name (Add City)</h1>
+<h1>@tp.Name (Add City)</h1>    
 
 @foreach (var c in cities)
 {  

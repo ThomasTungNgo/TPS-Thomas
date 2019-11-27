@@ -7,14 +7,15 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TPS.Domain;
+using TPS.Web.Areas.Administration.Models;
 
 namespace TPS.Web.Areas.Administration.Controllers
 {
-  
+    [Area("Administration")]
     public class TravelPackagesController : AdministrationController
     {
-        public TravelPackagesController(TPSDbContext db, UserManager<IdentityUser> userManager)
-            :base(db,userManager)
+        public TravelPackagesController(TPSDbContext context, UserManager<IdentityUser> userManager)
+            :base(context,userManager)
         {
            
         }
@@ -73,7 +74,14 @@ namespace TPS.Web.Areas.Administration.Controllers
                 return NotFound();
             }
 
-            var travelPackage = await _db.TravelPackages.FindAsync(id);
+            var travelPackage = await _db.TravelPackages
+               .Include(tp => tp.Cities)
+                   .ThenInclude(tpc => tpc.City)
+               .Include(tp => tp.Cities)
+                   .ThenInclude(tpc => tpc.TravelPackageCityAttractions)
+                   .ThenInclude(tpca => tpca.CityAttraction)
+               .FirstOrDefaultAsync(tp => tp.Id == id);
+
             if (travelPackage == null)
             {
                 return NotFound();
