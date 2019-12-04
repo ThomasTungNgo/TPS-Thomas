@@ -35,6 +35,10 @@ namespace TPS.Domain
 
             package.AddCity(brisbane, 5, allOfBrisbaneAttractions);
 
+
+
+
+
             db.SaveChanges(); 
         }
     }

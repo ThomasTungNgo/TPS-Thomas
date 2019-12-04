@@ -17,7 +17,7 @@ namespace TPS.Domain
         public int TravelPackageId { get; set; }
         public TravelPackage TravelPackage { get; set; }
         public DateTime StartDate { get; set; }
-        public decimal SalePrice { get; set; }
+        public decimal SalePrice { get; set; }  
         public string Feedback { get; set; }
 
         public int VoucherId { get; set; }

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TPS.Domain;
 
 namespace TPS.Domain.Migrations
 {
     [DbContext(typeof(TPSDbContext))]
-    partial class TPSDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191203031743_Add City Name in linking table 1")]
+    partial class AddCityNameinlinkingtable1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

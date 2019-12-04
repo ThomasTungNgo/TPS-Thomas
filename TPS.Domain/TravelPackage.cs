@@ -12,12 +12,17 @@ namespace TPS.Domain
     {
         public List<TravelPackageCity> Cities { get; set; } = new List<TravelPackageCity>();
         public int Id { get; set; }
+
+        [Display(Name = "Tour Name")]
         public string Name { get; set; }
+
+        [Display(Name = "Tour Description")]
         public string Description { get; set; }
         public int StatusId { get; private set; }
+
         public int IntensityId { get; private set; }
 
-        [MaxLength(500, ErrorMessage = "Your comment is too long")]
+        [MaxLength(10, ErrorMessage = "Your comment must be under 10 char")]
         public string Comment { get; set; }
 
         [Range(1, 5, ErrorMessage = "Rating must be between 1 and 5")]
@@ -26,12 +31,16 @@ namespace TPS.Domain
         public TravelPackageStatus Status { get => (TravelPackageStatus)StatusId; }
 
         [Range(1, 3, ErrorMessage = "Pick intensity between 1 and 3")]
+        [Display(Name = "Tour Intensity")]
         public TravelPackageIntensity Intensity { get => (TravelPackageIntensity)IntensityId; }
 
         //recommended retail price
         public decimal RRP { get; set; }
         public int DurationDay { get; set; }
         public int DurationNight { get; set; }
+
+
+
         public TravelPackageCity AddCity(City c,int days, params CityAttraction[] attractions)
         {
             var tpc = new TravelPackageCity

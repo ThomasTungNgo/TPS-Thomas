@@ -1,4 +1,7 @@
 ﻿@model TPS.Domain.TravelPackage
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
 
 @using TPS.Web.Areas.Administration.Controllers;
 
@@ -18,7 +21,8 @@
                         <div class="home_breadcrumbs">
                             <ul class="home_breadcrumbs_list">
                                 <li class="home_breadcrumb">
-                                    <a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                                    <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                                </li>
                                 <li class="home_breadcrumb">Offers</li>
                             </ul>
                         </div>
@@ -73,36 +77,55 @@
                         Description
                         @Model.Description
                     </div>
+                    <div class="item_text">
+                        Comment
+                        @Model.Comment
+                    </div>
                     <div class="item_more_link"><a href="#">Read More</a></div>
                 </div>
             </div>
 
             <div class="buttons_container">
-                @if (User.IsInRole("Administrator"))
-                {
+                @if (SignInManager.IsSignedIn(User))
+                    @if (User.IsInRole("Administrator"))
+                    {
+                        <div class="button button_1 elements_button">
+                            <a 
+                               href="/administration/travelpackages/edit/@Model.Id"
+                               @*asp-area="Administration"
+                               asp-controller="TravelPackages"
+                               asp-action="Edit"
+                               asp-route-id="@Model.Id"*@>
+                                Edit
+                            </a>
+                        </div>
+                    }
+                    @if (User.IsInRole("Customer"))
+                    {
+                        <div class="button button_1 elements_button">
+                            <a 
+                               href="/customer/home/comment/@Model.Id"
+                               @*asp-area="Customer"
+                               asp-controller="Home"
+                               asp-action="AddTravelPackage"
+                               asp-route-id=@Model.Id*@>
+                                Comment
+                            </a>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="button button_1 elements_button">
+                            <a asp-area="Identity"
+                               asp-page="/Account/Register">
+                                Add to Cart
+                            </a>
+                        </div>
+                    }
                     <div class="button button_1 elements_button">
-                        <a asp-area="Administration"
-                           asp-controller="TravelPackages"
-                           asp-action="Edit"
-                           asp-route-id="@Model.Id">
-                            Edit
-                        </a> 
+                        <a asp-action="Index">Back to List</a>
                     </div>
-                }
-                @if (User.IsInRole("Customer"))
-                {
-                    <div class="button button_1 elements_button">
-                        <a asp-area="Customer"
-                           asp-controller="Home"
-                           asp-action="Index">
-                            Pay Now
-                        </a>
-                    </div>
-                }
-                <div class="button button_1 elements_button">
-                    <a asp-action="Index">Back to List</a>
                 </div>
             </div>
         </div>
     </div>
-</div>

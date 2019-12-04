@@ -31,6 +31,7 @@ namespace TPS.Web
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
+
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                  .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
@@ -46,14 +47,12 @@ namespace TPS.Web
                 options.Password.RequireUppercase = false;
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireLowercase = false;
-               
+
 
             });
 
-
-
-
             services.AddDbContext<TPSDbContext>(ServiceLifetime.Scoped);
+
             services.AddMvc();
             services.AddControllers();
             services.AddControllersWithViews();
@@ -81,7 +80,7 @@ namespace TPS.Web
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(name: "administration", pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute(name: "administration", pattern: "{area:exists}/{controller=TravelPackages}/{action=Index}/{id?}");
                 endpoints.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });

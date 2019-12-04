@@ -1,21 +1,35 @@
-﻿@model IEnumerable<TPS.Domain.CityAttraction>
+﻿@model TPS.Domain.CityAttraction
+
 @{
     ViewData["Title"] = "Create";
-    var travelPackageCity = (TravelPackageCity)ViewBag.TravelPackageCity;
 }
 
-<h1>@travelPackageCity.TravelPackage.Name</h1>
-<h2>@travelPackageCity.City.Name @travelPackageCity.City.Country</h2>
+<h1>@Model.CityName</h1>
 
-@foreach (var cityAttraction in Model)
-{
-    <div style="margin:2.5px;border:1px solid black;padding:2.5px">
+<h4>Add an Attraction</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
         <form asp-action="Create">
-            @cityAttraction.Name
-            <input type="hidden" name="TravelPackageCityId" value="@travelPackageCity.Id" />
-            <input type="hidden" name="CityAttractionId" value="@cityAttraction.Id" />
-            <input type="submit" value="Add Attraction" />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" asp-route-cityId="@Model.CityId" value="Add to City" class="btn btn-primary" />
+            </div>
         </form>
     </div>
-}
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
 

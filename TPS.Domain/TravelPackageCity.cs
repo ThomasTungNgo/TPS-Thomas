@@ -10,6 +10,7 @@ namespace TPS.Domain
         public int TravelPackageId { get; set; }
         public TravelPackage TravelPackage { get; set; }
         public int CityId { get; set; }
+        public string CityName { get; set; }
         public City City { get; set; }
         public int NumberOfDays { get; set; }
         public List<TravelPackageCityAttraction> TravelPackageCityAttractions { get; set; } = new List<TravelPackageCityAttraction>();

@@ -9,22 +9,36 @@
 <h2>@city.City.Name @city.City.Country</h2>
 
 <p>
-    <a asp-action="Create" asp-route-tpcId="@city.Id">Add Attraction</a>
+    <a asp-action="CreateFromList" asp-route-tpcId="@city.Id">Add Attraction</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-               Attraction
+                Attraction
+            </th>
+            <th>
+                Description
+            </th>
+            <th>
+                Action
             </th>
         </tr>
     </thead>
     <tbody>
 @foreach (var a in Model) {
         <tr>
-
             <td>
                 @a.CityAttraction.Name
+            </td>
+            <td>
+                @a.CityAttraction.Description
+            </td>
+            <td>
+                <form action="/" method="post">
+
+                    <a asp-action="Remove" asp-route-id="@a.Id">Remove</a>
+                </form>
             </td>
         </tr>
 }

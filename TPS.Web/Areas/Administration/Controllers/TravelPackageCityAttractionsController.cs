@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TPS.Domain;
 
@@ -38,9 +39,8 @@ namespace TPS.Web.Areas.Administration.Controllers
             return View(attractions);
         }
     
-    
-    
-        public IActionResult Create(int tpcId)
+        [HttpGet]
+        public IActionResult CreateFromList(int tpcId)
         {
            var travelPackageCity = _db.TravelPackageCities
             .Include(tpc => tpc.TravelPackage)
@@ -51,29 +51,57 @@ namespace TPS.Web.Areas.Administration.Controllers
 
             var attractions = _db.CityAttractions
                 .Where(ca => ca.CityId == travelPackageCity.CityId)
-                .ToArray();
+                .ToList();
 
             return View(attractions); 
-
-
         }
 
 
         [HttpPost]
-        public IActionResult Create(TravelPackageCityAttraction m)
+        public IActionResult CreateFromList(TravelPackageCityAttraction m)
         {
             var tpca = new TravelPackageCityAttraction
             {
                  CityAttractionId = m.CityAttractionId,
-                  TravelPackageCityId = m.TravelPackageCityId
+                 TravelPackageCityId = m.TravelPackageCityId
             };
             _db.TravelPackageCityAttractions.Add(tpca);
             _db.SaveChanges();
             return RedirectToAction(nameof(Index), new { tpcId = m.TravelPackageCityId }); 
-
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Create(int cityId)
+        {
+            var ca = _db.CityAttractions
+                .First(ca => ca.City.Id == cityId);
 
+            return View(ca);
+        }       
 
+        [HttpPost]
+        public async Task<IActionResult> Create(TravelPackageCityAttraction model)
+        {
+            if (ModelState.IsValid)
+            {
+                var tpca = new TravelPackageCityAttraction
+                {
+                    CityAttractionId = model.CityAttractionId,
+                    TravelPackageCityId = model.TravelPackageCityId
+                };
+                _db.TravelPackageCityAttractions.Add(tpca);
+                _db.SaveChanges();
+                return RedirectToAction(nameof(Index), new { tpcId = model.TravelPackageCityId});
+            }
+            return View(model);
+        }
+
+        public async Task<IActionResult> Remove(int? id)
+        {
+            var tpca = await _db.TravelPackageCityAttractions.FindAsync(id);
+            _db.TravelPackageCityAttractions.Remove(tpca);
+            await _db.SaveChangesAsync();
+            return RedirectToAction(nameof(Index), new { tpcId = tpca.TravelPackageCityId });
+        }
     }
 }

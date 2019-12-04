@@ -21,12 +21,15 @@ namespace TPS.Web.Areas.Administration.Controllers
         // GET: Administration/TravelPackageCities
         public async Task<IActionResult> Index(int tpId)
         {
+            ViewBag.TravelPackage = _db.TravelPackages
+                .Include(tp=> tp.Cities)
+                .First(tp => tp.Id == tpId);
 
-            ViewBag.TravelPackage = _db.TravelPackages.First(tp => tp.Id == tpId);
             var tPSDbContext = _db.TravelPackageCities
                 .Include(t => t.City)
                 .Include(t => t.TravelPackage)
-                .Where(t=>t.TravelPackageId == tpId);
+                .Where(t=>t.TravelPackageId == tpId);   
+
             return View(await tPSDbContext.ToListAsync());
         }
 

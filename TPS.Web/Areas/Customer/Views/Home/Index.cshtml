@@ -3,9 +3,16 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Customer Home</h1>
+    <div class="container" style="padding-top: 250px; padding-bottom:20px">
+        <h2>Customer Home</h2>
+        <a href="/customer/home/edit">Edit your Info</a>
+        <div class="col-lg">ID: @ViewBag.Id</div>
+        <div class="col-lg">Name: @ViewBag.Forename @ViewBag.Surname</div>
+        <div class="col-lg">Email: @ViewBag.Email</div>
+        @foreach (var item in ViewBag.Package)
+        {
+            <div class="col-lg">Travel Package Id: @item.Id</div>
+            <div class="col-lg">Travel Package Name: @item.Name</div>
+        }
 
-<div>ID: @ViewBag.Id</div>
-<div>Name: @ViewBag.Forename @ViewBag.Surname</div>
-<div>Email: @ViewBag.Email</div>
-   
+    </div>

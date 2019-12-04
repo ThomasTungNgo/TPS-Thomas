@@ -5,6 +5,10 @@
     <UserSecretsId>aspnet-TPS.Web-3397D46D-736B-45EE-A9B6-8C7094015909</UserSecretsId>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Content Remove="Views\TravelPackages\Edit.cshtml" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.0.0" />

@@ -8,24 +8,30 @@
 <h2>Travel Package: @tp.Name</h2>
 
 <p>
- <a asp-action="Create" asp-route-tpId="@tp.Id">Add City</a>
+    <a asp-action="Create" asp-route-tpId="@tp.Id">Add City</a>
 </p>
 <table class="table">
     <thead>
-        <tr>
-            <th>City</th>
-            <th>Days</th>
-            <th>Attractions</th>
+        <tr class="row">
+            <th class="col-3">City</th>
+            <th class="col-1">Days</th>
+            <th class="col-8">Attractions</th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) 
-{
-        <tr>
-            <td>@item.City.Name</td>
-            <td>@item.NumberOfDays</td>
-            <td><a asp-action="Index" asp-controller="TravelPackageCityAttractions" asp-route-tpcId="@item.Id">Attractions</a></td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr class="row">
+                <td class="col-3">@item.City.Name</td>
+                <td class="col-1">@item.NumberOfDays</td>
+                @foreach (var item1 in item.TravelPackageCityAttractions)
+                {
+                    <td class="col-8">
+                        <p>@item1.CityAttraction.CityName</p>
+                    </td>
+                }
+                <td><a asp-action="Index" asp-controller="TravelPackageCityAttractions" asp-route-tpcId="@item.Id">Attractions</a></td>
+            </tr>
+        }
     </tbody>
 </table>

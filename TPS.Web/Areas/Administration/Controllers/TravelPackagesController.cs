@@ -14,8 +14,8 @@ namespace TPS.Web.Areas.Administration.Controllers
     [Area("Administration")]
     public class TravelPackagesController : AdministrationController
     {
-        public TravelPackagesController(TPSDbContext context, UserManager<IdentityUser> userManager)
-            :base(context,userManager)
+        public TravelPackagesController(TPSDbContext db, UserManager<IdentityUser> userManager)
+            :base(db,userManager)
         {
            
         }
@@ -80,7 +80,7 @@ namespace TPS.Web.Areas.Administration.Controllers
                .Include(tp => tp.Cities)
                    .ThenInclude(tpc => tpc.TravelPackageCityAttractions)
                    .ThenInclude(tpca => tpca.CityAttraction)
-               .FirstOrDefaultAsync(tp => tp.Id == id);
+               .FirstOrDefaultAsync(tp => tp.Id == id); 
 
             if (travelPackage == null)
             {
@@ -94,7 +94,7 @@ namespace TPS.Web.Areas.Administration.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,StatusId,RRP")] TravelPackage travelPackage)
+        public async Task<IActionResult> Edit(int id, TravelPackage travelPackage)
         {
             if (id != travelPackage.Id)
             {
@@ -119,7 +119,7 @@ namespace TPS.Web.Areas.Administration.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index), new { area = "Administration" });
             }
             return View(travelPackage);
         }
